@@ -1,60 +1,57 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.acme</groupId>
-  <artifactId>code-with-quarkus-full</artifactId>
+
+  <groupId>org.acme</groupId> <!-- TODO: CHANGE THIS -->
+  <artifactId>my-bamoe-business-service</artifactId> <!-- TODO: CHANGE THIS -->
   <version>1.0.0-SNAPSHOT</version>
+
   <properties>
-    <compiler-plugin.version>3.13.0</compiler-plugin.version>
     <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-    <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-    <quarkus.platform.version>3.15.3</quarkus.platform.version>
-    <skipITs>true</skipITs>
-    <surefire-plugin.version>3.3.1</surefire-plugin.version>
+
+    <!-- Versions -->
+    <version.maven-compiler-plugin>3.13.0</version.maven-compiler-plugin>
+    <version.maven-surefire-plugin>3.3.1</version.maven-surefire-plugin>
+
+    <version.quarkus>3.15.3</version.quarkus>
+    <version.bamoe>9.2.0-ibm-0002</version.bamoe>
+    
     <version.io.quarkiverse.embedded.postgresql>0.3.0</version.io.quarkiverse.embedded.postgresql>
-
-    <kogito.bom.group-id>com.ibm.bamoe</kogito.bom.group-id>
-    <kogito.bom.artifact-id>bamoe-bom</kogito.bom.artifact-id>
-    <kogito.bom.version>9.2.0-ibm-0001</kogito.bom.version>
-
-    <bamoe.techpreview.bom.artifact-id>bamoe-techpreview-bom</bamoe.techpreview.bom.artifact-id>
+    <version.io.quarkiverse.quarkus-oidc-proxy>0.1.2</version.io.quarkiverse.quarkus-oidc-proxy>
   </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>${quarkus.platform.group-id}</groupId>
-        <artifactId>${quarkus.platform.artifact-id}</artifactId>
-        <version>${quarkus.platform.version}</version>
+        <groupId>quarkus-bom</groupId>
+        <artifactId>io.quarkus.platform</artifactId>
+        <version>${version.quarkus}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>${kogito.bom.group-id}</groupId>
-        <artifactId>${kogito.bom.artifact-id}</artifactId>
-        <version>${kogito.bom.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>${kogito.bom.group-id}</groupId>
-        <artifactId>${bamoe.techpreview.bom.artifact-id}</artifactId>
-        <version>${kogito.bom.version}</version>
+        <groupId>com.ibm.bamoe</groupId>
+        <artifactId>bamoe-bom</artifactId>
+        <version>${version.bamoe}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
   <dependencies>
+
+    <!-- ILMT -->
     <dependency>
       <groupId>com.ibm.bamoe</groupId>
       <artifactId>bamoe-ilmt-compliance-quarkus-pamoe</artifactId>
     </dependency>
 
-    
+
     <!-- Kogito core -->
     <dependency>
       <groupId>org.jbpm</groupId>
@@ -88,6 +85,7 @@
       <groupId>org.kie</groupId>
       <artifactId>kogito-addons-quarkus-data-audit</artifactId>
     </dependency>
+
     <!-- Kogito persistence -->
     <dependency>
       <groupId>org.kie</groupId>
@@ -101,6 +99,7 @@
       <groupId>org.kie</groupId>
       <artifactId>kogito-addons-quarkus-data-audit-jpa</artifactId>
     </dependency>
+
     <!-- Kogito dev -->
     <dependency>
       <groupId>org.jbpm</groupId>
@@ -128,6 +127,15 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-agroal</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-oidc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkiverse.oidc-proxy</groupId>
+      <artifactId>quarkus-oidc-proxy</artifactId>
+      <version>${version.io.quarkiverse.quarkus-oidc-proxy}</version>
     </dependency>
 
 
@@ -158,9 +166,9 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>${quarkus.platform.group-id}</groupId>
+        <groupId>io.quarkus.platform</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${quarkus.platform.version}</version>
+        <version>${version.quarkus}</version>
         <extensions>true</extensions>
         <executions>
           <execution>
@@ -174,7 +182,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>${compiler-plugin.version}</version>
+        <version>${version.maven-compiler-plugin}</version>
         <configuration>
           <compilerArgs>
             <arg>-parameters</arg>
@@ -183,7 +191,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>${surefire-plugin.version}</version>
+        <version>${version.maven-surefire-plugin}</version>
         <configuration>
           <systemPropertyVariables>
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
@@ -193,7 +201,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>${surefire-plugin.version}</version>
+        <version>${version.maven-surefire-plugin}</version>
         <executions>
           <execution>
             <goals>
@@ -212,6 +220,7 @@
       </plugin>
     </plugins>
   </build>
+
   <profiles>
     <profile>
       <id>native</id>
@@ -221,7 +230,6 @@
         </property>
       </activation>
       <properties>
-        <skipITs>false</skipITs>
         <quarkus.package.type>native</quarkus.package.type>
       </properties>
     </profile>
