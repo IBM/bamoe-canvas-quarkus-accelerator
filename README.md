@@ -1,42 +1,35 @@
-# BAMOE DMN Project
+# `<Your project's title>`
 
-This project has been auto-generated from the BAMOE DMN Accelerator.
-It follows a template for the Apache Maven pom.xml, README (this file), LICENSE, logo, and application.properties files.
-Please make changes as appropriate.
+> _This project was auto-generated from the BAMOE Canvas Accelerator `Quarkus (DMN)`, and enables Decisions and Rules. It's built on [Quarkus](https://quarkus.io/), the Supersonic Subatomic Java Framework._
+>
+> **NOTE**: Some properties configured in `src/main/resources/application.properties` have to be updated replacing the `<TODO>` placeholder with actual values for your usage.
 
-A BAMOE project builds upon Quarkus, the Supersonic Subatomic Java Framework.
-More information about Quarkus can be found at https://quarkus.io/.
+# Description
 
-## Running the application in dev mode
+`<Your project's description>`
 
-Dev mode enables a number of helpful features while developing the project.
-These include:
+# Building and running
+
+### In dev mode
+
+```shell script
+mvn clean quarkus:dev
+```
+
+Dev mode enables a number of helpful features while developing the project:
 
 - Incremental compilation
-- Live Reload both in the browser and Java code
+- Live-reloading both in the browser and for Java code
 - Automatic test execution
-- Testcontainer startup for infrastructure
-- OpenAPI specifications
-- DevUI resources (https://quarkus.io/guides/dev-ui)
-- Others depending on project capabilities
+- OpenAPI specifications for HTTP endpoints
 
-You can run your application in dev mode as follows:
+### As a JAR
 
 ```shell script
-./mvnw compile quarkus:dev
+mvn clean package
 ```
 
-> **_NOTE:_** DevUI is available at http://localhost:8080/q/dev/.
-
-## Packaging and running the application
-
-The application can be packaged using:
-
-```shell script
-./mvnw package
-```
-
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
+This command produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
 Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
 
 The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
@@ -44,34 +37,46 @@ The application is now runnable using `java -jar target/quarkus-app/quarkus-run.
 If you want to build an _über-jar_, execute the following command:
 
 ```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
+mvn clean package -Dquarkus.package.type=uber-jar
 ```
 
 The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
 
-## Creating a native executable
-
-You can create a native executable using:
+### As a native executable
 
 ```shell script
-./mvnw package -Dnative
+mvn clean package -Dnative
 ```
 
 Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
 
 ```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
+mvn clean package -Dnative -Dquarkus.native.container-build=true
 ```
 
-You can then execute your native executable with: `./target/code-with-quarkus-1.0.0-SNAPSHOT-runner`
+You can then execute your native executable with: `./target/*-1.0.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
 
-## Provided Code
+---
 
-The `src/main/resources/application.properties` file contains the basic properties for the project, enabling:
-
-- DevServices for BAMOE
-
-Add any additional code, BAMOE resource files, and/or properties to their appropriate places following Apache Maven's standard project layout.
-
+### _Notes on provided code and how to evolve this application_
+ 
+> The `src/main/resources/application.properties` file contains the basic properties for the project, enabling:
+> 
+> - CORS protection
+> - OpenAPI Specifications
+> - Swagger UI
+> - Secured endpoints with OIDC
+> 
+> Add any additional code, BAMOE resource files, and/or properties to their appropriate places following Apache Maven's standard project layout:
+> - `src/main/java/`
+>   - For Java production code.
+> - `src/main/resources/`
+>   - For production configuration files and Decisions (`.dmn`), Rules (`.drl`), Excel Decision Tables (`.xslx`), and others.
+> - `src/test/java/`
+>   - For Java test code.
+> - `src/test/resources/`
+>   - For test configuration files.
+> 
+> For more information about BAMOE, please refer to [the official BAMOE Documentation](https://www.ibm.com/docs/en/ibamoe).
