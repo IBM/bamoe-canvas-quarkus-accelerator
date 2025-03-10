@@ -43,6 +43,7 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
   <dependencies>
 
     <!-- ILMT -->
@@ -50,7 +51,6 @@
       <groupId>com.ibm.bamoe</groupId>
       <artifactId>bamoe-ilmt-compliance-quarkus-pamoe</artifactId>
     </dependency>
-
 
     <!-- Kogito core -->
     <dependency>
@@ -110,7 +110,6 @@
       <artifactId>quarkus-jdbc-h2</artifactId>
     </dependency>
 
-
     <!-- Quarkus -->
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -138,8 +137,7 @@
       <version>${version.io.quarkiverse.quarkus-oidc-proxy}</version>
     </dependency>
 
-
-    <!-- Utils -->
+    <!-- Quarkus Utils -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
@@ -149,20 +147,14 @@
       <artifactId>quarkus-smallrye-health</artifactId>
     </dependency>
 
-
-    <!-- Tests -->
+    <!-- Testing -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>io.rest-assured</groupId>
-      <artifactId>rest-assured</artifactId>
-      <scope>test</scope>
-    </dependency>
-
   </dependencies>
+
   <build>
     <plugins>
       <plugin>
@@ -234,4 +226,5 @@
       </properties>
     </profile>
   </profiles>
+  
 </project>

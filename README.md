@@ -2,7 +2,7 @@
 
 > _This project was auto-generated from the BAMOE Canvas Accelerator `Quarkus (Full)`, and enables Processes, Decisions, and Rules. It's built on [Quarkus](https://quarkus.io/), the Supersonic Subatomic Java Framework._
 >
-> **NOTE**: Some properties configured in `src/main/resources/application.properties` have to be updated replacing the <TODO> placeholder with actual values for your usage.
+> **NOTE**: Some properties configured in `src/main/resources/application.properties` have to be updated replacing the `<TODO>` placeholder with actual values for your usage.
 
 # Description
 
@@ -61,7 +61,7 @@ If you want to learn more about building native executables, please consult http
 
 ---
 
-### _NOTE: Provided code and how to evolve this application_
+### _Notes on provided code and how to evolve this application_
  
 > The `src/main/resources/application.properties` file contains the basic properties for the project, enabling:
 > 
