@@ -22,7 +22,7 @@
     <version.bamoe>9.2.0-ibm-0004</version.bamoe>
     
     <version.io.quarkiverse.embedded.postgresql>0.3.0</version.io.quarkiverse.embedded.postgresql>
-    <version.io.quarkiverse.quarkus-oidc-proxy>0.1.2</version.io.quarkiverse.quarkus-oidc-proxy>
+    <version.io.quarkiverse.quarkus-oidc-proxy>0.1.3</version.io.quarkiverse.quarkus-oidc-proxy>
   </properties>
 
   <dependencyManagement>
