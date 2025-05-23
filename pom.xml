@@ -1,8 +1,7 @@
-<?xml version="1.0"?>
-<project
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.acme</groupId> <!-- TODO: CHANGE THIS -->
@@ -10,87 +9,57 @@
   <version>1.0.0-SNAPSHOT</version>
 
   <properties>
-    <maven.compiler.release>17</maven.compiler.release>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <!-- Versions -->
-    <version.maven-compiler-plugin>3.13.0</version.maven-compiler-plugin>
-    <version.maven-surefire-plugin>3.3.1</version.maven-surefire-plugin>
-
-    <version.quarkus>3.15.3</version.quarkus>
-    <version.bamoe>9.2.0-ibm-0004</version.bamoe>
+    <version.bamoe.bom>9.2.0-ibm-0004</version.bamoe.bom>
+    <version.org.springframework.boot>3.4.3</version.org.springframework.boot>
   </properties>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>io.quarkus.platform</groupId>
-        <artifactId>quarkus-bom</artifactId>
-        <version>${version.quarkus}</version>
+        <groupId>com.ibm.bamoe</groupId>
+        <artifactId>bamoe-bom</artifactId>
+        <version>${version.bamoe.bom}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>com.ibm.bamoe</groupId>
-        <artifactId>bamoe-bom</artifactId>
-        <version>${version.bamoe}</version>
-        <type>pom</type>
-        <scope>import</scope>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <version>${version.org.springframework.boot}</version>
+        <optional>true</optional>
       </dependency>
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
-
-    <!-- ILMT -->
     <dependency>
-      <groupId>com.ibm.bamoe</groupId>
-      <artifactId>bamoe-ilmt-compliance-quarkus-dmoe</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
-
-    <!-- Kogito core -->
     <dependency>
-      <groupId>org.drools</groupId>
-      <artifactId>drools-quarkus-decisions</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.drools</groupId>
-      <artifactId>drools-quarkus-rules</artifactId>
-    </dependency>
-
-    <!-- Quarkus -->
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy</artifactId>
+      <artifactId>drools-decisions-spring-boot-starter</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy-jackson</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-oidc</artifactId>
-    </dependency>
-
-    <!-- Quarkus Utils -->
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-openapi</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-health</artifactId>
-    </dependency>
-
-    <!-- Testing -->
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-junit5</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-
-    <!-- Kogito test -->
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-scenario-simulation</artifactId>
@@ -99,75 +68,47 @@
   </dependencies>
 
   <build>
+    <finalName>${project.artifactId}</finalName>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.kie.kogito</groupId>
+          <artifactId>kogito-maven-plugin</artifactId>
+          <version>${version.bamoe.bom}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${version.org.springframework.boot}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
     <plugins>
       <plugin>
-        <groupId>io.quarkus.platform</groupId>
-        <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${version.quarkus}</version>
-        <extensions>true</extensions>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-maven-plugin</artifactId>
         <executions>
           <execution>
+            <phase>compile</phase>
             <goals>
-              <goal>build</goal>
-              <goal>generate-code</goal>
-              <goal>generate-code-tests</goal>
+              <goal>generateModel</goal>
             </goals>
           </execution>
         </executions>
       </plugin>
       <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>${version.maven-compiler-plugin}</version>
-        <configuration>
-          <compilerArgs>
-            <arg>-parameters</arg>
-          </compilerArgs>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${version.maven-surefire-plugin}</version>
-        <configuration>
-          <systemPropertyVariables>
-            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-            <maven.home>${maven.home}</maven.home>
-          </systemPropertyVariables>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <version>${version.maven-surefire-plugin}</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
         <executions>
           <execution>
             <goals>
-              <goal>integration-test</goal>
-              <goal>verify</goal>
+              <goal>repackage</goal>
             </goals>
-            <configuration>
-              <systemPropertyVariables>
-                <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
-                <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-                <maven.home>${maven.home}</maven.home>
-              </systemPropertyVariables>
-            </configuration>
           </execution>
         </executions>
       </plugin>
     </plugins>
   </build>
-
-  <profiles>
-    <profile>
-      <id>native</id>
-      <activation>
-        <property>
-          <name>native</name>
-        </property>
-      </activation>
-      <properties>
-        <quarkus.package.type>native</quarkus.package.type>
-      </properties>
-    </profile>
-  </profiles>
-  
 </project>
