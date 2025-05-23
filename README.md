@@ -1,6 +1,6 @@
 # `<Your project's title>`
 
-> _This project was auto-generated from the BAMOE Canvas Accelerator `Quarkus (DMN)`, and enables Decisions and Rules. It's built on [Quarkus](https://quarkus.io/), the Supersonic Subatomic Java Framework._
+> _This project was auto-generated from the BAMOE Canvas Accelerator `Spring Boot (DMN)`, and enables Decisions and Rules. It's built on [Spring Boot](https://spring.io/), the Java-based framework for building standalone production-ready Spring applications.._
 >
 > **NOTE**: Some properties configured in `src/main/resources/application.properties` have to be updated replacing the `<TODO>` placeholder with actual values for your usage.
 
@@ -8,39 +8,40 @@
 
 `<Your project's description>`
 
+
 # Building and running
+
+### Prerequisites
+
+You will need:
+- Java 17+ installed
+- Environment variable JAVA_HOME set accordingly
+- Maven 3.9.6+ installed
 
 ### In dev mode
 
 ```shell script
-mvn clean quarkus:dev
+mvn clean compile spring-boot:run
 ```
 
-Dev mode enables a number of helpful features while developing the project:
+After a successful start, the application will be available at http://:0.0.0.0:8080 address (IP depends on application.properties configuration).
 
-- Incremental compilation
-- Live-reloading both in the browser and for Java code
-- Automatic test execution
-- OpenAPI specifications for HTTP endpoints
+The Swagger UI page (http://0.0.0.0:8080/swagger-ui/index.html) shows all the generated endpoints, providing a way to quickly verify them.
 
-### As a JAR
+### Hot-reload in dev-mode
+For medium to large sized applications, recompiling and restarting the application upon code changes could be cumbersome and time-consuming. To simplify that, the Spring Boot framework offers devtools.
 
+The condition is that the classpath has to be "manually" rebuilt to trigger the reload.
+
+Since Business Services also relies on automatic code-generation driven by models and executed by the 'kogito-maven-plugin', the approach is to:
+
+Create a mvn clean compile command/button (details vary by IDE) to be fired on-demand.
+
+Start the application with:
 ```shell script
-mvn clean package
+mvn clean compile spring-boot:run.
 ```
-
-This command produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-
-```shell script
-mvn clean package -Dquarkus.package.type=uber-jar
-```
-
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+Execute the command at point 1 when it is required to reload changes.
 
 ### As a native executable
 
@@ -48,15 +49,12 @@ The application, packaged as an _über-jar_, is now runnable using `java -jar ta
 mvn clean package -Dnative
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+### Package and Run
 
-```shell script
-mvn clean package -Dnative -Dquarkus.native.container-build=true
+```sh
+mvn clean package
+java -jar ./target/your-application-name.jar
 ```
-
-You can then execute your native executable with: `./target/*-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
 
 ---
 
