@@ -18,14 +18,14 @@
     <version.maven-compiler-plugin>3.13.0</version.maven-compiler-plugin>
     <version.maven-surefire-plugin>3.3.1</version.maven-surefire-plugin>
 
-    <version.quarkus>3.15.3</version.quarkus>
-    <version.bamoe>9.2.0-ibm-0004</version.bamoe>
+    <version.quarkus>3.20.1</version.quarkus>
+    <version.bamoe>9.2.1-ibm-0001</version.bamoe>
   </properties>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>io.quarkus.platform</groupId>
+        <groupId>io.quarkus</groupId>
         <artifactId>quarkus-bom</artifactId>
         <version>${version.quarkus}</version>
         <type>pom</type>
@@ -101,7 +101,7 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>io.quarkus.platform</groupId>
+        <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
         <version>${version.quarkus}</version>
         <extensions>true</extensions>
