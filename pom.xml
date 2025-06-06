@@ -16,6 +16,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <!-- Versions -->
     <version.org.springframework.boot>3.4.3</version.org.springframework.boot>
     <version.bamoe>9.2.1-ibm-0001</version.bamoe>
+    <version.org.kie.kogito>9.2.1-ibm-0001</version.org.kie.kogito>
   </properties>
 
   <dependencyManagement>
@@ -37,6 +38,19 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
   </dependencyManagement>
 
   <dependencies>
+    <!-- ILMT -->
+    <dependency>
+      <groupId>com.ibm.bamoe</groupId>
+      <artifactId>bamoe-ilmt-compliance-spring-boot-dmoe</artifactId>
+    </dependency>
+
+    <!-- BAMOE -->
+    <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-decisions-spring-boot-starter</artifactId>
+    </dependency>
+
+    <!-- Spring Boot -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
@@ -46,10 +60,8 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
       <artifactId>spring-boot-devtools</artifactId>
       <optional>true</optional>
     </dependency>
-    <dependency>
-      <groupId>org.drools</groupId>
-      <artifactId>drools-decisions-spring-boot-starter</artifactId>
-    </dependency>
+
+    <!-- Testing -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -60,6 +72,8 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
     </dependency>
+
+    <!-- BAMOE Testing -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-scenario-simulation</artifactId>
@@ -75,7 +89,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
         <plugin>
           <groupId>org.kie.kogito</groupId>
           <artifactId>kogito-maven-plugin</artifactId>
-          <version>${version.bamoe}</version>
+          <version>${version.org.kie.kogito}</version>
         </plugin>
         <plugin>
           <groupId>org.springframework.boot</groupId>
