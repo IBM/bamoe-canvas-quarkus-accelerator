@@ -15,8 +15,8 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 
     <!-- Versions -->
     <version.org.springframework.boot>3.4.3</version.org.springframework.boot>
-    <version.bamoe>9.2.1-ibm-0001</version.bamoe>
-    <version.org.kie.kogito>9.2.1-ibm-0001</version.org.kie.kogito>
+    <version.bamoe>9.2.1-ibm-0002</version.bamoe>
+    <version.org.kie.kogito>9.2.1-ibm-0002</version.org.kie.kogito>
   </properties>
 
   <dependencyManagement>
