@@ -19,7 +19,7 @@
     <version.maven-surefire-plugin>3.3.1</version.maven-surefire-plugin>
 
     <version.quarkus>3.20.1</version.quarkus>
-    <version.bamoe>9.2.1-ibm-0001</version.bamoe>
+    <version.bamoe>9.2.1-ibm-0002</version.bamoe>
     
     <version.io.quarkiverse.embedded.postgresql>0.3.0</version.io.quarkiverse.embedded.postgresql>
     <version.io.quarkiverse.quarkus-oidc-proxy>0.2.2</version.io.quarkiverse.quarkus-oidc-proxy>
