@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.acme</groupId> <!-- TODO: CHANGE THIS -->
@@ -14,9 +14,9 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- Versions -->
-    <version.org.springframework.boot>3.4.3</version.org.springframework.boot>
-    <version.bamoe>9.2.1-ibm-0005</version.bamoe>
-    <version.org.kie.kogito>9.2.1-ibm-0005</version.org.kie.kogito>
+    <version.org.springframework.boot>3.4.9</version.org.springframework.boot>
+    <version.bamoe>9.3.0-ibm-0003</version.bamoe>
+    <version.org.kie.kogito>9.3.0-ibm-0003</version.org.kie.kogito>
   </properties>
 
   <dependencyManagement>
@@ -25,6 +25,13 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
         <groupId>com.ibm.bamoe</groupId>
         <artifactId>bamoe-bom</artifactId>
         <version>${version.bamoe}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-spring-boot-bom</artifactId>
+        <version>${version.org.kie.kogito}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -103,6 +110,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
       <plugin>
         <groupId>org.kie.kogito</groupId>
         <artifactId>kogito-maven-plugin</artifactId>
+        <version>${version.org.kie.kogito}</version>
         <executions>
           <execution>
             <phase>compile</phase>

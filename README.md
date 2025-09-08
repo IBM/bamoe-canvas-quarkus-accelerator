@@ -59,15 +59,16 @@ java -jar ./target/your-application-name.jar
 ---
 
 ### _Notes on provided code and how to evolve this application_
- 
+
 > The `src/main/resources/application.properties` file contains the basic properties for the project, enabling:
-> 
+>
 > - CORS protection
 > - OpenAPI Specifications
 > - Swagger UI
 > - Secured endpoints with OIDC
-> 
+>
 > Add any additional code, BAMOE resource files, and/or properties to their appropriate places following Apache Maven's standard project layout:
+>
 > - `src/main/java/`
 >   - For Java production code.
 > - `src/main/resources/`
@@ -76,5 +77,6 @@ java -jar ./target/your-application-name.jar
 >   - For Java test code.
 > - `src/test/resources/`
 >   - For test configuration files.
-> 
+>
 > For more information about BAMOE, please refer to [the official BAMOE Documentation](https://www.ibm.com/docs/en/ibamoe).
+
