@@ -18,8 +18,8 @@
     <version.maven-compiler-plugin>3.13.0</version.maven-compiler-plugin>
     <version.maven-surefire-plugin>3.3.1</version.maven-surefire-plugin>
 
-    <version.quarkus>3.20.1</version.quarkus>
-    <version.bamoe>9.2.1-ibm-0005</version.bamoe>
+    <version.quarkus>3.20.2.2</version.quarkus>
+    <version.bamoe>9.3.0-ibm-0005</version.bamoe>
     
     <version.io.quarkiverse.embedded.postgresql>0.3.0</version.io.quarkiverse.embedded.postgresql>
     <version.io.quarkiverse.quarkus-oidc-proxy>0.2.2</version.io.quarkiverse.quarkus-oidc-proxy>
@@ -63,10 +63,6 @@
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
-      <artifactId>kogito-addons-quarkus-jobs-management</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.kie</groupId>
       <artifactId>kie-addons-quarkus-process-svg</artifactId>
     </dependency>
     <dependency>
@@ -79,7 +75,7 @@
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
-      <artifactId>kogito-addons-quarkus-jobs</artifactId>
+      <artifactId>kogito-addons-quarkus-embedded-jobs</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
@@ -92,8 +88,8 @@
       <artifactId>kie-addons-quarkus-persistence-jdbc</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.kie.kogito</groupId>
-      <artifactId>jobs-service-storage-jpa</artifactId>
+      <groupId>org.kie</groupId>
+      <artifactId>kogito-addons-quarkus-embedded-jobs-jpa</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
@@ -135,6 +131,10 @@
       <groupId>io.quarkiverse.oidc-proxy</groupId>
       <artifactId>quarkus-oidc-proxy</artifactId>
       <version>${version.io.quarkiverse.quarkus-oidc-proxy}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm.bamoe</groupId>
+      <artifactId>bamoe-gen-ai-task-work-item-handler-quarkus</artifactId>
     </dependency>
 
     <!-- Quarkus Utils -->
