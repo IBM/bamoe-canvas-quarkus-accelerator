@@ -18,8 +18,8 @@
     <version.maven-compiler-plugin>3.13.0</version.maven-compiler-plugin>
     <version.maven-surefire-plugin>3.3.1</version.maven-surefire-plugin>
 
-    <version.quarkus>3.20.1</version.quarkus>
-    <version.bamoe>9.2.1-ibm-0005</version.bamoe>
+    <version.quarkus>3.20.2.2</version.quarkus>
+    <version.bamoe>9.3.0-ibm-0005</version.bamoe>
   </properties>
 
   <dependencyManagement>
