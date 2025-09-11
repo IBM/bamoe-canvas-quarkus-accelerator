@@ -1,3 +1,5 @@
+<!-- Copyright IBM Corp. 2025. -->
+
 # `<Your project's title>`
 
 > _This project was auto-generated from the BAMOE Canvas Accelerator `Quarkus (Full)`, and enables Processes, Decisions, and Rules. It's built on [Quarkus](https://quarkus.io/), the Supersonic Subatomic Java Framework._
