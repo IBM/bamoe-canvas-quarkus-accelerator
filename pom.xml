@@ -19,7 +19,7 @@
     <version.maven-surefire-plugin>3.3.1</version.maven-surefire-plugin>
 
     <version.quarkus>3.20.2.2</version.quarkus>
-    <version.bamoe>9.3.0-ibm-0003</version.bamoe>
+    <version.bamoe>9.3.0-ibm-0004</version.bamoe>
   </properties>
 
   <dependencyManagement>
@@ -90,7 +90,7 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- Kogito test -->
+    <!-- BAMOE Testing -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-scenario-simulation</artifactId>
