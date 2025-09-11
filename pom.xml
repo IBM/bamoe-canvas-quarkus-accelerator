@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright IBM Corp. 2025. -->
 <project
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -16,8 +17,8 @@
 
     <!-- Versions -->
     <version.org.springframework.boot>3.4.9</version.org.springframework.boot>
-    <version.bamoe>9.3.0-ibm-0003</version.bamoe>
-    <version.org.kie.kogito>9.3.0-ibm-0003</version.org.kie.kogito>
+    <version.bamoe>9.3.0-ibm-0004</version.bamoe>
+    <version.org.kie.kogito>9.3.0-ibm-0004</version.org.kie.kogito>
   </properties>
 
   <dependencyManagement>
@@ -30,9 +31,9 @@
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>org.kie.kogito</groupId>
-        <artifactId>kogito-spring-boot-bom</artifactId>
-        <version>${version.org.kie.kogito}</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${version.org.springframework.boot}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -166,6 +167,13 @@
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- BAMOE Testing -->
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-scenario-simulation</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>

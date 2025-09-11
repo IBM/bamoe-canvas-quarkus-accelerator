@@ -1,3 +1,5 @@
+<!-- Copyright IBM Corp. 2025. -->
+
 # `<Your project's title>`
 
 > _This project was auto-generated from the BAMOE Canvas Accelerator `Spring Boot (Full)`, and enables Decision, Rules, and Workflows. It's built on [Spring Boot](https://spring.io/), the Java-based framework for building standalone production-ready Spring applications._

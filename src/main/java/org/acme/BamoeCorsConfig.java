@@ -1,3 +1,4 @@
+// Copyright IBM Corp. 2025.
 package org.acme;
 
 import java.util.Arrays;
@@ -24,8 +25,8 @@ public class BamoeCorsConfig {
         corsConfiguration.addAllowedHeader(CorsConfiguration.ALL);
 
         // Explicitly setting the list of the supported origin patterns (required when setting Allow Credentials to true).
-        // In all BAMOE examples BAMOE Management Console by default runs in port 8280 or 8380.
-        corsConfiguration.setAllowedOriginPatterns(Arrays.asList("http://*:8080", "http://*:8280", "http://*:8380"));
+        // In all BAMOE examples BAMOE Management Console by default runs in port 8280.
+        corsConfiguration.setAllowedOriginPatterns(Arrays.asList("http://*:8080", "http://*:8280"));
 
         // Enabling all HTTP methods since BAMOE Management Console will make use of all of them for different purposes (POST, GET, PATCH, PUT, DELETE, OPTIONS)
         corsConfiguration.addAllowedMethod(CorsConfiguration.ALL);

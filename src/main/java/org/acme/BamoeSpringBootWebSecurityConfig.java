@@ -1,3 +1,4 @@
+// Copyright IBM Corp. 2025.
 package org.acme;
 
 import org.springframework.context.annotation.Bean;
