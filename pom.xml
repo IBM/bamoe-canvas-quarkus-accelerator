@@ -14,8 +14,8 @@
 
     <!-- Versions -->
     <version.org.springframework.boot>3.4.9</version.org.springframework.boot>
-    <version.bamoe>9.3.0-ibm-0005</version.bamoe>
-    <version.org.kie.kogito>9.3.0-ibm-0005</version.org.kie.kogito>
+    <version.bamoe>9.3.0-ibm-0006</version.bamoe>
+    <version.org.kie.kogito>9.3.0-ibm-0006</version.org.kie.kogito>
   </properties>
 
   <dependencyManagement>
