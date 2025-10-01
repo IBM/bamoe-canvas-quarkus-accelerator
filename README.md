@@ -6,6 +6,7 @@ This repository hosts three separate Accelerators for Quarkus- and Spring Boot-b
 - `Quarkus (DMN)`: Decisions and Rules capabilities including Test Scenario (SCESIM) support for enabling Decisions and Rules unit testing.
 - `Quarkus (Full)`: Workflow, Decisions, and Rules capabilities including Data-Index, Jobs Service, Data Audit, User Tasks, and Runtimes persistence subsystems. Also features a Quarkus Dev UI for enhanced development experience.
 - `Spring Boot (DMN)`: Decisions and Rules capabilities including Test Scenario (SCESIM) support for enabling Decisions and Rules unit testing.
+- `Spring Boot (Full)`: Workflow, Decisions, and Rules capabilities including Data-Index, Jobs Service, Data Audit, User Tasks, and Runtimes persistence subsystems. Also features a Web Console for enhanced development experience.
 
 > Each Accelerator is stored in its own branch, following the `{version}-{framework{-{name}` pattern. E.g., `9.2.1-ibm-0003-quarkus-full`, or `9.2.1-ibm-0003-spring-boot-dmn.`
 
