@@ -1,23 +1,54 @@
-# IBM Business Automation Manager Open Editions :: Accelerators
+<!-- Copyright IBM Corp. 2025. -->
 
-Accelerators are project templates that can be applied to existing folders containing Workflows (BPMN), Decisions (DMN), and Rules (DRL), transforming them into complete Business Service projects that can be built, tested, executed, and deployed.
+# `<Your project's title>`
 
-This repository hosts three separate Accelerators for Quarkus- and Spring Boot-based projects:
-- `Quarkus (DMN)`: Decisions and Rules capabilities including Test Scenario (SCESIM) support for enabling Decisions and Rules unit testing.
-- `Quarkus (Full)`: Workflow, Decisions, and Rules capabilities including Data-Index, Jobs Service, Data Audit, User Tasks, and Runtimes persistence subsystems. Also features a Quarkus Dev UI for enhanced development experience.
-- `Spring Boot (DMN)`: Decisions and Rules capabilities including Test Scenario (SCESIM) support for enabling Decisions and Rules unit testing.
-- `Spring Boot (Full)`: Workflow, Decisions, and Rules capabilities including Data-Index, Jobs Service, Data Audit, User Tasks, and Runtimes persistence subsystems. Also features a Web Console for enhanced development experience.
+> _This project was auto-generated from the BAMOE Canvas Accelerator `Spring Boot (DMN)`, and enables Decisions and Rules. It's built on [Spring Boot](https://spring.io/), the Java-based framework for building standalone production-ready Spring applications.._
+>
+> **NOTE**: Some properties configured in `src/main/resources/application.properties` have to be updated replacing the `<TODO>` placeholder with actual values for your usage.
 
-> Each Accelerator is stored in its own branch, following the `{version}-{framework{-{name}` pattern. E.g., `9.2.1-ibm-0003-quarkus-full`, or `9.2.1-ibm-0003-spring-boot-dmn.`
+# Description
 
-> The `main` branch of this repository is not used for development and does not host any Accelerators.
+`<Your project's description>`
+
+# Building and running
+
+### In dev mode
+
+```shell script
+mvn clean compile spring-boot:run
+```
+
+After a successful start, the application will be available at http://:0.0.0.0:8080 address (IP depends on application.properties configuration).
+
+The Swagger UI page (http://0.0.0.0:8080/swagger-ui/index.html) shows all the generated endpoints, providing a way to quickly verify them.
+
+### Package and Run
+
+```sh
+mvn clean package
+java -jar ./target/your-application-name.jar
+```
 
 ---
 
-For more information about BAMOE, see: https://www.ibm.com/products/business-automation-manager-open-editions
+### _Notes on provided code and how to evolve this application_
 
-For BAMOE's documentation, visit: https://www.ibm.com/docs/ibamoe
-
----
-
-For more information about Quarkus, refer to: https://quarkus.io/about/
+> The `src/main/resources/application.properties` file contains the basic properties for the project, enabling:
+>
+> - CORS protection
+> - OpenAPI Specifications
+> - Swagger UI
+> - Secured endpoints with OIDC
+>
+> Add any additional code, BAMOE resource files, and/or properties to their appropriate places following Apache Maven's standard project layout:
+>
+> - `src/main/java/`
+>   - For Java production code.
+> - `src/main/resources/`
+>   - For production configuration files and Decisions (`.dmn`), Rules (`.drl`), Excel Decision Tables (`.xslx`), and others.
+> - `src/test/java/`
+>   - For Java test code.
+> - `src/test/resources/`
+>   - For test configuration files.
+>
+> For more information about BAMOE, please refer to [the official BAMOE Documentation](https://www.ibm.com/docs/en/ibamoe).
