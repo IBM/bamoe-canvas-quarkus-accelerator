@@ -1,7 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright IBM Corp. 2025. -->
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.acme</groupId> <!-- TODO: CHANGE THIS -->
@@ -47,13 +50,27 @@
     <!-- ILMT -->
     <dependency>
       <groupId>com.ibm.bamoe</groupId>
-      <artifactId>bamoe-ilmt-compliance-spring-boot-dmoe</artifactId>
+      <artifactId>bamoe-ilmt-compliance-spring-boot-pamoe</artifactId>
     </dependency>
 
     <!-- BAMOE -->
     <dependency>
-      <groupId>org.drools</groupId>
-      <artifactId>drools-decisions-spring-boot-starter</artifactId>
+      <groupId>org.jbpm</groupId>
+      <artifactId>jbpm-with-drools-spring-boot-starter</artifactId>
+    </dependency>
+
+    <!-- Kogito core -->
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-springboot-process-management</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-springboot-process-svg</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-springboot-source-files</artifactId>
     </dependency>
 
     <!-- Spring Boot -->
@@ -67,7 +84,77 @@
       <optional>true</optional>
     </dependency>
 
-    <!-- Testing -->
+    <!-- Spring Boot Security -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+    </dependency>
+
+    <!-- Persistence -->
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-springboot-persistence-jdbc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jbpm</groupId>
+      <artifactId>jbpm-addons-springboot-usertask-storage-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jdbc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-database-postgresql</artifactId>
+    </dependency>
+
+    <!-- Data Index -->
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kogito-addons-springboot-data-index-jpa</artifactId>
+    </dependency>
+
+    <!-- Data Audit -->
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kogito-addons-springboot-data-audit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kogito-addons-springboot-data-audit-jpa</artifactId>
+    </dependency>
+
+    <!-- Jobs Service -->
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kogito-addons-springboot-embedded-jobs</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kogito-addons-springboot-embedded-jobs-jpa</artifactId>
+    </dependency>
+
+    <!-- BAMOE Spring Boot IdP Discovery addon -->
+    <dependency>
+      <groupId>com.ibm.bamoe</groupId>
+      <artifactId>bamoe-spring-boot-idp-discovery</artifactId>
+    </dependency>
+
+    <!-- BAMOE Gen AI Task addon -->
+    <dependency>
+      <groupId>com.ibm.bamoe</groupId>
+      <artifactId>bamoe-gen-ai-task-work-item-handler-spring-boot</artifactId>
+    </dependency>
+
+    <!-- test related -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -87,24 +174,41 @@
     </dependency>
   </dependencies>
 
+  <profiles>
+    <profile>
+      <id>production</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <spring.profiles.active>prod</spring.profiles.active>
+      </properties>
+    </profile>
+    <profile>
+      <id>development</id>
+      <properties>
+        <spring.profiles.active>dev</spring.profiles.active>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>com.h2database</groupId>
+          <artifactId>h2</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>com.ibm.bamoe</groupId>
+          <artifactId>bamoe-spring-boot-web-console</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
   <build>
     <finalName>${project.artifactId}</finalName>
-
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.kie.kogito</groupId>
-          <artifactId>kogito-maven-plugin</artifactId>
-          <version>${version.org.kie.kogito}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-maven-plugin</artifactId>
-          <version>${version.org.springframework.boot}</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>org.kie.kogito</groupId>
