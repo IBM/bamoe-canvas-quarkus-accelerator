@@ -1,2 +1,23 @@
-# bamoe-accelerators
-This repo will hold the accelerators which are needed for spring boot or quarkus based application creation from bamoe canvas.
+# IBM Business Automation Manager Open Editions :: Accelerators (INTERNAL - Repo)
+
+Accelerators are project templates that can be applied to existing folders containing Workflows (BPMN), Decisions (DMN), and Rules (DRL), transforming them into complete Business Service projects that can be built, tested, executed, and deployed.
+
+This repository hosts three separate Accelerators for Quarkus- and Spring Boot-based projects:
+- `Quarkus (DMN)`: Decisions and Rules capabilities including Test Scenario (SCESIM) support for enabling Decisions and Rules unit testing.
+- `Quarkus (Full)`: Workflow, Decisions, and Rules capabilities including Data-Index, Jobs Service, Data Audit, User Tasks, and Runtimes persistence subsystems. Also features a Quarkus Dev UI for enhanced development experience.
+- `Spring Boot (DMN)`: Decisions and Rules capabilities including Test Scenario (SCESIM) support for enabling Decisions and Rules unit testing.
+- `Spring Boot (Full)`: Workflow, Decisions, and Rules capabilities including Data-Index, Jobs Service, Data Audit, User Tasks, and Runtimes persistence subsystems. Also features a Web Console for enhanced development experience.
+
+> Each Accelerator is stored in its own branch, following the `{version}-{framework{-{name}` pattern. E.g., `9.2.1-ibm-0003-quarkus-full`, or `9.2.1-ibm-0003-spring-boot-dmn.`
+
+> The `main` branch of this repository is not used for development and does not host any Accelerators.
+
+---
+
+For more information about BAMOE, see: https://www.ibm.com/products/business-automation-manager-open-editions
+
+For BAMOE's documentation, visit: https://www.ibm.com/docs/ibamoe
+
+---
+
+For more information about Quarkus, refer to: https://quarkus.io/about/
