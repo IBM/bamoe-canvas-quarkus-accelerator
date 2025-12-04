@@ -1,23 +1,89 @@
-# IBM Business Automation Manager Open Editions :: Accelerators (INTERNAL - Repo)
+<!--
+  IBM Confidential
+  PID 5900-AR4
+  Copyright IBM Corp. 2025
+-->
 
-Accelerators are project templates that can be applied to existing folders containing Workflows (BPMN), Decisions (DMN), and Rules (DRL), transforming them into complete Business Service projects that can be built, tested, executed, and deployed.
+# `<Your project's title>`
 
-This repository hosts three separate Accelerators for Quarkus- and Spring Boot-based projects:
-- `Quarkus (DMN)`: Decisions and Rules capabilities including Test Scenario (SCESIM) support for enabling Decisions and Rules unit testing.
-- `Quarkus (Full)`: Workflow, Decisions, and Rules capabilities including Data-Index, Jobs Service, Data Audit, User Tasks, and Runtimes persistence subsystems. Also features a Quarkus Dev UI for enhanced development experience.
-- `Spring Boot (DMN)`: Decisions and Rules capabilities including Test Scenario (SCESIM) support for enabling Decisions and Rules unit testing.
-- `Spring Boot (Full)`: Workflow, Decisions, and Rules capabilities including Data-Index, Jobs Service, Data Audit, User Tasks, and Runtimes persistence subsystems. Also features a Web Console for enhanced development experience.
+> _This project was auto-generated from the BAMOE Canvas Accelerator `Quarkus (DMN)`, and enables Decisions and Rules. It's built on [Quarkus](https://quarkus.io/), the Supersonic Subatomic Java Framework._
+>
+> **NOTE**: Some properties configured in `src/main/resources/application.properties` have to be updated replacing the `<TODO>` placeholder with actual values for your usage.
 
-> Each Accelerator is stored in its own branch, following the `{version}-{framework{-{name}` pattern. E.g., `9.2.1-ibm-0003-quarkus-full`, or `9.2.1-ibm-0003-spring-boot-dmn.`
+# Description
 
-> The `main` branch of this repository is not used for development and does not host any Accelerators.
+`<Your project's description>`
+
+# Building and running
+
+### In dev mode
+
+```shell script
+mvn clean quarkus:dev
+```
+
+Dev mode enables a number of helpful features while developing the project:
+
+- Incremental compilation
+- Live-reloading both in the browser and for Java code
+- Automatic test execution
+- OpenAPI specifications for HTTP endpoints
+
+### As a JAR
+
+```shell script
+mvn clean package
+```
+
+This command produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
+Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+
+The Business Service is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+
+If you want to build an _über-jar_, execute the following command:
+
+```shell script
+mvn clean package -Dquarkus.package.type=uber-jar
+```
+
+The Business Service, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+
+### As a native executable
+
+```shell script
+mvn clean package -Dnative
+```
+
+Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+
+```shell script
+mvn clean package -Dnative -Dquarkus.native.container-build=true
+```
+
+You can then execute your native executable with: `./target/*-1.0.0-SNAPSHOT-runner`
+
+If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
 
 ---
 
-For more information about BAMOE, see: https://www.ibm.com/products/business-automation-manager-open-editions
+### _Notes on provided code and how to evolve this Business Service_
 
-For BAMOE's documentation, visit: https://www.ibm.com/docs/ibamoe
-
----
-
-For more information about Quarkus, refer to: https://quarkus.io/about/
+> The `src/main/resources/application.properties` file contains the basic properties for the project, enabling:
+>
+> - CORS protection
+> - OpenAPI Specifications
+> - Swagger UI
+> - Secured endpoints with OIDC
+>
+> Add any additional code, BAMOE resource files, and/or properties to their appropriate places following Apache Maven's standard project layout:
+>
+> - `src/main/java/`
+>   - For Java production code.
+> - `src/main/resources/`
+>   - For production configuration files and Decisions (`.dmn`), Rules (`.drl`), Excel Decision Tables (`.xslx`), and others.
+> - `src/test/java/`
+>   - For Java test code.
+> - `src/test/resources/`
+>   - For test configuration files.
+>
+> For more information about BAMOE, please refer to [the official BAMOE Documentation](https://www.ibm.com/docs/en/ibamoe).
