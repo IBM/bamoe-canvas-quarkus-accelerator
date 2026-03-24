@@ -1,0 +1,43 @@
+{
+  "specVersion": "1",
+  "name": "Openshift Deployment",
+  "description": "Deploys this project to an OpenShift cluster",
+  "eligibleAuthProviderIds": ["openshift"],
+  "baselineManifests": ["manifests/Deployment.yaml", "manifests/Service.yaml", "manifests/Route.yaml"],
+  "parameters": {
+    "containerImage": {
+      "id": "containerImage",
+      "name": "Container Image",
+      "description": "The URL of the Container Image to be used for the container",
+      "type": "text",
+      "defaultValue": "quay.io/bamoe/canvas-dev-deployment-base:9.4.0-ibm-0006-jdk21",
+      "patches": {
+        "manifests/Deployment.yaml": ["patches/container-image.json"]
+      }
+    },
+    "containerPort": {
+      "id": "containerPort",
+      "name": "Container Port",
+      "description": "The port that is exposed by the container",
+      "type": "number",
+      "defaultValue": 8080,
+      "patches": {
+        "manifests/Deployment.yaml": ["patches/deployment-container-port.json"],
+        "manifests/Service.yaml": ["patches/service-target-port.json"]
+      }
+    },
+    "command": {
+      "id": "command",
+      "name": "Command",
+      "description": "The command to be executed when the container starts (passed as args to the Deployment)",
+      "type": "text",
+      "defaultValue": "./mvnw spring-boot:run -Dspring-boot.run.arguments=--server.address=0.0.0.0 -Pdevelopment",
+      "patches": {
+        "manifests/Deployment.yaml": ["patches/command.json"]
+      }
+    }
+  },
+  "uploadServiceUrlTemplate": "https://${{ $.devDeployment.resources.Route['${{ $.devDeployment.uniqueName }}'].status.ingress[0].host }}",
+  "healthStatusUrlTemplate": "https://${{ $.devDeployment.resources.Route['${{ $.devDeployment.uniqueName }}'].status.ingress[0].host }}/actuator/health",
+  "deploymentAccessUrlTemplate": "https://${{ $.devDeployment.resources.Route['${{ $.devDeployment.uniqueName }}'].status.ingress[0].host }}/dev/bamoe-web-console"
+}
