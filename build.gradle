@@ -1,0 +1,103 @@
+plugins {
+  id 'java'
+  id "org.kie.kogito.gradle" version "${kogitoPluginVersion}"
+  id "org.springframework.boot" version "${springBootVersion}"
+}
+
+group = 'org.acme' // TODO: CHANGE THIS
+version = '1.0.0-SNAPSHOT' // TODO: CHANGE THIS
+
+dependencies {
+  /* Spring Boot BOM */
+  implementation enforcedPlatform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+
+  /* The BAMOE BOM manages all dependencies required to create */
+  /* Business Services — including Apache KIE, Drools, jBPM, and Kogito */
+  implementation platform("com.ibm.bamoe:bamoe-bom:${bamoeVersion}")
+
+  /* BAMOE ILMT */
+  /* Uncomment for non-containerized deployments only */
+  // implementation 'com.ibm.bamoe:bamoe-ilmt-compliance-spring-boot-dmoe'
+
+  /* Kogito Core */
+  implementation 'org.drools:drools-decisions-spring-boot-starter'
+  implementation 'org.drools:drools-decisiontables'
+
+  /* Spring Boot */
+  implementation 'org.springframework.boot:spring-boot-starter-actuator'
+  developmentOnly "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
+
+  /* Testing */
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testImplementation 'io.rest-assured:rest-assured'
+  // Required because of https://docs.junit.org/6.0.0/running-tests/build-support.html
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+  
+  /* Kogito Testing */
+  testImplementation 'org.kie.kogito:kogito-scenario-simulation'
+}
+
+/* Profiles Management */
+/* To execute a build based on a profile, use ./gradlew clean build -PbuildProfile=dev */
+/* You can add new profile using this pattern: */
+/* 1. Create the `profile-{profileId}` in the project root */
+/* 2. Execute it with ./gradlew clean build -PbuildProfile=profileId */
+def profile = (findProperty('buildProfile') ?: '').toString()
+if (profile) {
+    apply from: "profile-${profile}.gradle"
+}
+
+generateModelConfig {
+  jsonSchemaVersion = "DRAFT_2019_09"
+}
+
+compileJava {
+  options.encoding = 'UTF-8'
+  options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+  options.encoding = 'UTF-8'
+}
+
+/* the Main Class should point to your Spring Boot Application */
+/* Entrypoint's bean (marked with @SpringBootApplication)      */
+ springBoot {
+  mainClass = 'org.acme.BamoeSpringBootApplication'
+}
+
+/** DO NOT EDIT / REMOVE BELOW DECLARATIONS **/
+/* Those steps are REQUIRED to correctly build this Business Services project */
+/* BEGIN */
+tasks.named("resolveMainClassName") {
+  dependsOn(tasks.named("compileSecondaryJava"))
+}
+
+tasks.named("bootRun") {
+  dependsOn(tasks.named("compileSecondaryJava"))
+}
+
+tasks.named("bootJar") {
+  dependsOn(tasks.named("compileSecondaryJava"))
+}
+
+tasks.named("jar") {
+  dependsOn(tasks.named("compileSecondaryJava"))
+  from(tasks.named("compileSecondaryJava").get())
+}
+
+tasks.named("compileTestJava") {
+  dependsOn(tasks.named("compileSecondaryJava"))
+}
+/* END */
+
+test {
+  // In this test block, do not remove the below dependsOn statement
+  dependsOn(tasks.named("compileSecondaryJava"))
+
+  // Required because of https://docs.junit.org/6.0.0/running-tests/build-support.html
+  useJUnitPlatform()
+
+  // Preventing the build to fail with no tests (can be removed, once tests are available)
+  failOnNoDiscoveredTests = false
+}
