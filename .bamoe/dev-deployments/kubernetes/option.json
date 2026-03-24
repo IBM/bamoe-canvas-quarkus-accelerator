@@ -1,0 +1,46 @@
+{
+  "specVersion": "1",
+  "name": "Kubernetes Deployment",
+  "description": "Deploys this project to a Kubernetes cluster",
+  "eligibleAuthProviderIds": ["kubernetes", "kind", "minikube"],
+  "baselineManifests": ["manifests/Deployment.yaml", "manifests/Service.yaml", "manifests/Ingress.yaml"],
+  "baselinePatches": {
+    "manifests/Deployment.yaml": ["patches/baseline-deployment.json"]
+  },
+  "parameters": {
+    "containerImage": {
+      "id": "containerImage",
+      "name": "Container Image",
+      "description": "The URL of the Container Image to be used for the container",
+      "type": "text",
+      "defaultValue": "quay.io/bamoe/canvas-dev-deployment-base:9.4.0-ibm-0006-jdk21",
+      "patches": {
+        "manifests/Deployment.yaml": ["patches/container-image.json"]
+      }
+    },
+    "containerPort": {
+      "id": "containerPort",
+      "name": "Container Port",
+      "description": "The port that is exposed by the container",
+      "type": "number",
+      "defaultValue": 8080,
+      "patches": {
+        "manifests/Deployment.yaml": ["patches/deployment-container-port.json"],
+        "manifests/Service.yaml": ["patches/service-target-port.json"]
+      }
+    },
+    "command": {
+      "id": "command",
+      "name": "Command",
+      "description": "The command to be executed when the container starts (passed as args to the Deployment)",
+      "type": "text",
+      "defaultValue": "./mvnw spring-boot:run -Dspring-boot.run.arguments=--server.address=0.0.0.0 -Pdevelopment",
+      "patches": {
+        "manifests/Deployment.yaml": ["patches/command.json"]
+      }
+    }
+  },
+  "uploadServiceUrlTemplate": "http://${{ $.devDeployment.resources.Ingress['${{ $.devDeployment.uniqueName }}'].status.loadBalancer.ingress[0].hostname }}/${{ $.devDeployment.uniqueName }}",
+  "healthStatusUrlTemplate": "http://${{ $.devDeployment.resources.Ingress['${{ $.devDeployment.uniqueName }}'].status.loadBalancer.ingress[0].hostname }}/${{ $.devDeployment.uniqueName }}/actuator/health",
+  "deploymentAccessUrlTemplate": "http://${{ $.devDeployment.resources.Ingress['${{ $.devDeployment.uniqueName }}'].status.loadBalancer.ingress[0].hostname }}/${{ $.devDeployment.uniqueName }}/dev/bamoe-web-console"
+}

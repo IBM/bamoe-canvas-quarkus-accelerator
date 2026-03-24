@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.acme</groupId> <!-- TODO: CHANGE THIS -->
+  <artifactId>your-bamoe-business-service</artifactId> <!-- TODO: CHANGE THIS -->
+  <version>1.0.0-SNAPSHOT</version>
+
+  <properties>
+    <maven.compiler.release>17</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <!-- Versions -->
+    <version.org.springframework.boot>3.5.12</version.org.springframework.boot>
+    <version.bamoe>9.4.0-ibm-0006</version.bamoe>
+    <version.bamoe.plugins>9.4.0-ibm-0006</version.bamoe.plugins>
+
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+       <!--
+         The BAMOE BOM manages all dependencies required to create
+         Business Services — including Apache KIE, Drools, jBPM, and Kogito
+       -->
+      <dependency>
+        <groupId>com.ibm.bamoe</groupId>
+        <artifactId>bamoe-bom</artifactId>
+        <version>${version.bamoe}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Spring Boot BOMs -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${version.org.springframework.boot}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <version>${version.org.springframework.boot}</version>
+        <optional>true</optional>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <!-- BAMOE ILMT -->
+    <!-- Uncomment for non-containerized deployments only -->
+    <!--
+    <dependency>
+      <groupId>com.ibm.bamoe</groupId>
+      <artifactId>bamoe-ilmt-compliance-spring-boot-dmoe</artifactId>
+    </dependency>
+    -->
+
+    <!-- Kogito Core -->
+    <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-decisions-spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-decisiontables</artifactId>
+    </dependency>
+
+    <!-- Spring Boot -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- Testing -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Kogito Testing -->
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-scenario-simulation</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>${project.artifactId}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-maven-plugin</artifactId>
+        <version>${version.bamoe.plugins}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generateModel</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${version.org.springframework.boot}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
