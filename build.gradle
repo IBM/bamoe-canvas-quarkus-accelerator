@@ -1,0 +1,71 @@
+plugins {
+  id 'java'
+  id 'io.quarkus'
+}
+
+group = 'org.acme' // TODO: CHANGE THIS
+version = '1.0.0-SNAPSHOT' // TODO: CHANGE THIS
+
+dependencies {
+  /* Quarkus BOM */
+  implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+  
+  /* The BAMOE BOM manages all dependencies required to create */
+  /* Business Services — including Apache KIE, Drools, jBPM, and Kogito */
+  implementation platform("com.ibm.bamoe:bamoe-bom:${bamoeVersion}")
+
+  /* BAMOE ILMT */
+  /* Uncomment for non-containerized deployments only */
+  // implementation 'com.ibm.bamoe:bamoe-ilmt-compliance-quarkus-dmoe'
+
+  /* Kogito Core */
+  implementation 'org.drools:drools-quarkus-decisions'
+  implementation 'org.drools:drools-quarkus-rules'
+  implementation 'org.drools:drools-decisiontables'
+  implementation 'org.kie.kogito:jbpm-flow'
+
+  /* Quarkus */
+  implementation 'io.quarkus:quarkus-resteasy'
+  implementation 'io.quarkus:quarkus-resteasy-jackson'
+
+  /* Quarkus Security */
+  implementation 'io.quarkus:quarkus-oidc'
+
+  /* Quarkus Utils */
+  implementation 'io.quarkus:quarkus-smallrye-openapi'
+  implementation 'io.quarkus:quarkus-smallrye-health'
+
+  /* Testing */
+  testImplementation 'io.quarkus:quarkus-junit5'
+  testImplementation 'io.rest-assured:rest-assured'
+  
+  /* Kogito Testing */
+  testImplementation 'org.kie.kogito:kogito-scenario-simulation'
+}
+
+/* Profiles Management */
+/* To execute a build based on a profile, use ./gradlew clean build -PbuildProfile=dev */
+/* You can add new profile using this pattern: */
+/* 1. Create the `profile-{profileId}` in the project root */
+/* 2. Execute it with ./gradlew clean build -PbuildProfile=profileId */
+def profile = (findProperty('buildProfile') ?: '').toString()
+if (profile) {
+    apply from: "profile-${profile}.gradle"
+}
+
+compileJava {
+  options.encoding = 'UTF-8'
+  options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+  options.encoding = 'UTF-8'
+}
+
+test {
+  // Required because of https://docs.junit.org/6.0.0/running-tests/build-support.html
+  systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
+  useJUnitPlatform()
+  // Preventing the build to fail with no tests (can be removed, once tests are available)
+  failOnNoDiscoveredTests = false
+}
