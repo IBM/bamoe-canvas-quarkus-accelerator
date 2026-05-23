@@ -1,0 +1,107 @@
+plugins {
+  id 'java'
+  id 'io.quarkus'
+}
+
+group = 'org.acme' // TODO: CHANGE THIS
+version = '1.0.0-SNAPSHOT' // TODO: CHANGE THIS
+
+dependencies {
+  /* Quarkus BOM */
+  implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+  
+  /* The BAMOE BOM manages all dependencies required to create */
+  /* Business Services — including Apache KIE, Drools, jBPM, and Kogito */
+  implementation platform("com.ibm.bamoe:bamoe-bom:${bamoeVersion}")
+
+  /* BAMOE ILMT */
+  /* Uncomment for non-containerized deployments only */
+  // implementation 'com.ibm.bamoe:bamoe-ilmt-compliance-quarkus-pamoe'
+
+  /* Kogito Core */
+  implementation 'org.jbpm:jbpm-with-drools-quarkus'
+  implementation 'org.kie:kie-addons-quarkus-process-management'
+  implementation 'org.kie:kie-addons-quarkus-process-svg'
+  implementation 'org.kie:kie-addons-quarkus-source-files'
+
+  /* Kogito Persistence */
+  implementation 'org.kie:kie-addons-quarkus-persistence-jdbc'
+  
+  /* Kogito Data-Index */
+  implementation 'org.kie:kogito-addons-quarkus-data-index-jpa'
+  
+  /* Kogito Data-Audit */
+  implementation 'org.kie:kogito-addons-quarkus-data-audit'
+  implementation 'org.kie:kogito-addons-quarkus-data-audit-jpa'
+  
+  /* Kogito Jobs Service */
+  implementation 'org.kie:kogito-addons-quarkus-embedded-jobs'
+  implementation 'org.kie:kogito-addons-quarkus-embedded-jobs-jpa'
+
+  /* Kogito User Tasks persistence */
+  implementation 'org.jbpm:jbpm-addons-quarkus-usertask-storage-jpa'
+  implementation 'org.kie.kogito:jbpm-usertask-workitem' // required for BAMOE Quarkus Dev UI to start correctly.
+
+  /* Kogito + Quarkus Event-driven Workflows */
+  /* Uncomment when working with Message Events in BPMN */
+  /* + application.properties # Event-driven Workflows # section */
+  // implementation 'org.kie:kie-addons-quarkus-messaging'
+  // implementation 'io.quarkus:quarkus-messaging-kafka'
+
+  /* BAMOE Gen AI Task addon */
+  implementation 'com.ibm.bamoe:bamoe-gen-ai-task-work-item-handler-quarkus'
+
+  /* BAMOE AI Agent Task addon */
+  implementation 'com.ibm.bamoe:bamoe-ai-agent-task-work-item-handler-quarkus'
+
+  /* BAMOE Process Instance Migration (PIM) */
+  implementation 'com.ibm.bamoe:bamoe-addons-quarkus-pim'
+
+  /* Quarkus */
+  implementation 'io.quarkus:quarkus-resteasy'
+  implementation 'io.quarkus:quarkus-resteasy-jackson'
+  implementation 'io.quarkus:quarkus-jdbc-postgresql'
+  implementation 'io.quarkus:quarkus-agroal'
+
+  /* Quarkus Security */
+  implementation 'io.quarkus:quarkus-oidc'
+  implementation "io.quarkiverse.oidc-proxy:quarkus-oidc-proxy:${quarkusOidcProxyVersion}"
+
+  /* Quarkus Utils */
+  implementation 'io.quarkus:quarkus-smallrye-openapi'
+  implementation 'io.quarkus:quarkus-smallrye-health'
+
+  /* Testing */
+  testImplementation 'io.quarkus:quarkus-junit5'
+  testImplementation 'io.rest-assured:rest-assured'
+  
+  /* Kogito Testing */
+  testImplementation 'org.kie.kogito:kogito-scenario-simulation'
+}
+
+/* Profiles Management */
+/* To execute a build based on a profile, use ./gradlew clean build -PbuildProfile=dev */
+/* You can add new profile using this pattern: */
+/* 1. Create the `profile-{profileId}` in the project root */
+/* 2. Execute it with ./gradlew clean build -PbuildProfile=profileId */
+def profile = (findProperty('buildProfile') ?: '').toString()
+if (profile) {
+    apply from: "profile-${profile}.gradle"
+}
+
+compileJava {
+  options.encoding = 'UTF-8'
+  options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+  options.encoding = 'UTF-8'
+}
+
+test {
+  systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
+  // Required because of https://docs.junit.org/6.0.0/running-tests/build-support.html
+  useJUnitPlatform()
+  // Preventing the build to fail with no tests (can be removed, once tests are available)
+  failOnNoDiscoveredTests = false
+}
