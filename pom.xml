@@ -22,7 +22,7 @@
 
     <!-- Versions -->
     <version.bamoe>9.5.0-ibm-0005</version.bamoe>
-    <version.quarkus>3.27.3</version.quarkus>
+    <version.quarkus>3.27.4</version.quarkus>
     <version.io.quarkiverse.quarkus-oidc-proxy>0.3.2</version.io.quarkiverse.quarkus-oidc-proxy>
   </properties>
 
