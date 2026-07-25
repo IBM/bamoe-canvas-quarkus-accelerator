@@ -1,0 +1,12 @@
+[
+  {
+    "op": "test",
+    "path": "/kind",
+    "value": "Deployment"
+  },
+  {
+    "op": "add",
+    "path": "/spec/template/spec/containers/0/args",
+    "value": ["dev-deployment-upload-service && ${{ $.parameters.command }}"]
+  }
+]
