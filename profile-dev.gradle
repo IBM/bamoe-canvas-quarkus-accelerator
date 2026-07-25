@@ -1,0 +1,10 @@
+dependencies {
+    /* BAMOE Quarkus Dev UI */
+    implementation 'com.ibm.bamoe:bamoe-quarkus-devui'
+
+    /* H2 Database for development */
+    implementation 'io.quarkus:quarkus-jdbc-h2'
+}
+
+/* Pointing to Quakus DEV profile */
+System.setProperty("quarkus.profile", "dev")
