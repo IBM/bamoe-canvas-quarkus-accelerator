@@ -1,0 +1,16 @@
+pluginManagement {
+  repositories {
+    mavenLocal()
+    gradlePluginPortal()
+    mavenCentral()
+  }
+
+  plugins {
+      /* This is *NEEDED* to correctly build your Business Services instance */
+      /* DO NOT REMOVE IT */
+    id "${quarkusPluginId}" version "${quarkusPluginVersion}"
+  }
+}
+
+/* Change this to your project name */
+rootProject.name = "my-quarkus-app"
