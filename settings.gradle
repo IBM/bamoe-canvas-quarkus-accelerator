@@ -1,0 +1,21 @@
+pluginManagement {
+  repositories {
+    mavenLocal()
+    gradlePluginPortal()
+    mavenCentral()
+
+  }
+
+  resolutionStrategy {
+    eachPlugin {
+      /* This is *NEEDED* to correctly build your Business Services instance */
+      /* DO NOT REMOVE IT */
+      if (requested.id.namespace == "org.kie.kogito") {
+        useModule("org.kie.kogito:kogito-gradle-plugin:${kogitoPluginVersion}")
+      }
+    }
+  }
+}
+
+/* Change this to your project name */
+rootProject.name = "my-quarkus-app"
