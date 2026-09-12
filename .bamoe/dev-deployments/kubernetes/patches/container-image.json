@@ -1,0 +1,12 @@
+[
+  {
+    "op": "test",
+    "path": "/kind",
+    "value": "Deployment"
+  },
+  {
+    "op": "replace",
+    "path": "/spec/template/spec/containers/0/image",
+    "value": "${{ $.parameters.containerImage }}"
+  }
+]
