@@ -1,0 +1,12 @@
+dependencies {
+/* H2 Database for development */
+implementation 'com.h2database:h2'
+    
+/* BAMOE Spring Boot Web Console */
+implementation 'com.ibm.bamoe:bamoe-spring-boot-web-console'
+}
+
+bootRun {
+    /* Pointing to Spring Boot DEV profile */
+    systemProperty 'spring.profiles.active', 'dev'
+}
