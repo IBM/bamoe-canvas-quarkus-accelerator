@@ -1,0 +1,39 @@
+[
+  {
+    "op": "test",
+    "path": "/kind",
+    "value": "Deployment"
+  },
+  {
+    "op": "add",
+    "path": "/spec/template/spec/containers/0/env/-",
+    "value": {
+      "name": "ROOT_PATH",
+      "value": "/${{ $.devDeployment.uniqueName }}"
+    }
+  },
+  {
+    "op": "add",
+    "path": "/spec/template/spec/containers/0/env/-",
+    "value": {
+      "name": "DEV_DEPLOYMENT__UPLOAD_SERVICE_ROOT_PATH",
+      "value": "${{ $.devDeployment.uniqueName }}"
+    }
+  },
+  {
+    "op": "add",
+    "path": "/spec/template/spec/containers/0/env/-",
+    "value": {
+      "name": "SERVER_SERVLET_CONTEXT_PATH",
+      "value": "/${{ $.devDeployment.uniqueName }}"
+    }
+  },
+  {
+    "op": "add",
+    "path": "/spec/template/spec/containers/0/env/-",
+    "value": {
+      "name": "QUARKUS_HTTP_ROOT_PATH",
+      "value": "/${{ $.devDeployment.uniqueName }}"
+    }
+  }
+]
