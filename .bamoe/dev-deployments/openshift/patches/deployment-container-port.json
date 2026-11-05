@@ -1,0 +1,12 @@
+[
+  {
+    "op": "test",
+    "path": "/kind",
+    "value": "Deployment"
+  },
+  {
+    "op": "replace",
+    "path": "/spec/template/spec/containers/0/ports/0/containerPort",
+    "value": "${{ $.parameters.containerPort }}"
+  }
+]
